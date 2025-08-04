@@ -1,4 +1,4 @@
-name: First CI Workflow
+name: Run hello.sh on push
  
 on:
   push:
@@ -13,5 +13,7 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v3
  
-      - name: Say Hello
-        run: echo "Hello from GitHub Actions!"
+      - name: Run hello.sh script
+        run: |
+          chmod +x hello.sh
+          ./hello.sh
