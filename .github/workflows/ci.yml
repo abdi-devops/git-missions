@@ -3,7 +3,8 @@ name: Run hello.sh on push
 on:
   push:
     branches:
-      - "feature-*"
+      -main
+      - 'feature-*'
   pull_request:
     branches:
       -main
@@ -15,8 +16,25 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
- 
-      - name: Run hello.sh script
+
+      - name: Show branch info
         run: |
-          chmod +x hello.sh
-          ./hello.sh
+          echo "GITHUB_REF=$GITHUB_REF"
+          echo "GITHUB_EVENT_NAME=$GITHUB_EVENT_NAME"
+ 
+      - name: Branch-specific behaviour
+        run: |
+          if [[ "$GITHUB_REF" == "refs/heads/main" ]]; then
+            echo "🚀 Deploying to production!"
+          elif [[ "$GITHUB_REF" == refs/heads/feature-* ]]; then
+            echo "📦 Running feature branch checks..."
+          else
+            echo "🧪 Unknown branch. Skipping production steps."
+          fi
+  
+      
+      - name: Make hello.sh executable
+        run: chmod +x hello.sh
+ 
+      - name: Run hello.sh
+        run: ./hello.sh Abdi
