@@ -1,4 +1,4 @@
-name: Run hello.sh on push
+name: CI with Branch Logic
  
 on:
   push:
