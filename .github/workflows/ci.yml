@@ -1,13 +1,14 @@
 name: CI with Branch Logic
  
 on:
+  workflow_dispatch:
   push:
     branches:
-      -main
+      - main
       - 'feature-*'
   pull_request:
     branches:
-      -main
+      - main
  
 jobs:
   build:
