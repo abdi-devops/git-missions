@@ -39,3 +39,6 @@ jobs:
  
       - name: Run hello.sh
         run: ./hello.sh Abdi
+
+      - name: Build Docker image
+        run: docker build -t hello-docker:${GITHUB_SHA} .
